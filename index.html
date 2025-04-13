@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tente a sua sorte com o FreeBTC.fun! Uma chance gratuita de encontrar uma carteira Bitcoin com saldo. Não há anúncios, nem custos - jogue à vontade!">
+    <meta name="description" content="Try your luck with FreeBTC.fun! A free chance to find a Bitcoin wallet with balance. No ads, no costs - play at will!">
     <meta name="keywords" content="FreeBTC.fun, Bitcoin Puzzle, encontrar chave Bitcoin, carteira Bitcoin grátis, tentar sorte, BTC grátis">
     <meta name="author" content="FreeBTC.fun">
-    <meta property="og:title" content="FreeBTC.fun - Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!">
-    <meta property="og:description" content="Tente a sua sorte e jogue gratuitamente! Encontre a chave do desafio 69 do Bitcoin Puzzle sem custos e sem anúncios.">
+    <meta property="og:title" content="FreeBTC.fun - Your free chance to find a Bitcoin wallet with balance!">
+    <meta property="og:description" content="Try your luck with FreeBTC.fun! A free chance to find a Bitcoin wallet with balance. No ads, no costs - play at will!">
     <meta property="og:image" content="https://bitcoin.org/img/icons/opengraph.png">
     <meta property="og:url" content="https://freebtc.fun">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="https://bitcoin.org/img/icons/opengraph.png">
-    <meta name="twitter:title" content="FreeBTC.fun - Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!">
-    <meta name="twitter:description" content="Tente a sua sorte no FreeBTC.fun e encontre uma carteira Bitcoin com saldo! Jogue gratuitamente e sem anúncios!">
+    <meta name="twitter:title" content="FreeBTC.fun - Your free chance to find a Bitcoin wallet with balance!">
+    <meta name="twitter:description" content="Try your luck with FreeBTC.fun! A free chance to find a Bitcoin wallet with balance. No ads, no costs - play at will!">
     <meta name="twitter:image" content="https://bitcoin.org/img/icons/opengraph.png">
     <meta name="twitter:creator" content="@freebtc.fun">
-    <title>FreeBTC.fun - Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!</title>
+    <title data-i18n="site.title.full">FreeBTC.fun - Your free chance to find a Bitcoin wallet with balance!</title>
     <link rel="canonical" href="https://freebtc.fun">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/elliptic/6.5.4/elliptic.min.js"></script>
@@ -120,13 +120,14 @@
         }
 
         h1 {
-            font-size: 4em;
+            font-size: clamp(2em, 8vw, 4em);
             margin: 0;
             text-shadow: 0 0 10px var(--accent-color),
                          0 0 20px var(--accent-color),
                          0 0 30px var(--accent-color);
             letter-spacing: 2px;
             position: relative;
+            word-wrap: break-word;
         }
 
         .subtitle {
@@ -330,48 +331,67 @@
         }
 
         .footer {
-            margin-top: 40px;
+            width: 100%;
             padding: 20px;
             text-align: center;
-            font-size: 0.9em;
-            color: var(--light-color);
-            opacity: 0.7;
-        }
-
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .credits {
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
 
-        .donation {
-            margin-top: 15px;
-            font-size: 0.9em;
+        .language-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .language-selector img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .language-selector img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
         }
 
         .btc-address {
-            color: var(--accent-color);
-            font-family: monospace;
             word-break: break-all;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            color: var(--primary-color);
         }
 
-        .btc-address:hover {
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--accent-color);
+        .info-button {
+            background: var(--primary-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            color: var(--light-color);
+            cursor: pointer;
+            margin: 0 10px;
         }
 
         .copy-button {
@@ -394,18 +414,86 @@
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(247, 147, 26, 0.5);
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--dark-color);
+            margin: 15% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-color);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+        }
+
+        .wallet-address {
+            word-break: break-all;
+            padding: 10px;
+            font-size: clamp(0.8em, 4vw, 1em);
+        }
+
+        .modal-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-content a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .modal-content ul {
+            margin: 20px 0;
+        }
+
+        .modal-content li {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
     <div class="particles" id="particles"></div>
     <div class="container">
         <div class="header">
-            <h1>FreeBTC.fun</h1>
-            <div class="subtitle">Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!</div>
+            <h1 data-i18n="site.title">FreeBTC.fun</h1>
+            <div class="subtitle" data-i18n="site.subtitle">Your free chance to find a Bitcoin wallet with balance!</div>
         </div>
         
         <div class="lottery-container">
-            <button id="start" onclick="start()">Tentar a Sorte!</button>
+            <button id="start" data-i18n="button.start" onclick="start()">Start Searching!</button>
             
             <div id="matrix">
                 <div class="slot-container">
@@ -423,17 +511,530 @@
     </div>
 
     <footer class="footer">
-        <div>Inspirado em: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a></div>
-        <div class="credits">
-            <a href="https://github.com/calvet" target="_blank">GitHub: @calvet</a>
+        <div class="language-selector">
+            <img src="https://flagcdn.com/24x18/gb.png" alt="English" title="English" data-lang="en">
+            <img src="https://flagcdn.com/24x18/br.png" alt="Português" title="Português" data-lang="pt">
+            <img src="https://flagcdn.com/24x18/es.png" alt="Español" title="Español" data-lang="es">
+            <img src="https://flagcdn.com/24x18/cn.png" alt="中文" title="中文" data-lang="zh">
+            <img src="https://flagcdn.com/24x18/in.png" alt="हिंदी" title="हिंदी" data-lang="hi">
+            <img src="https://flagcdn.com/24x18/sa.png" alt="العربية" title="العربية" data-lang="ar">
+            <img src="https://flagcdn.com/24x18/bd.png" alt="বাংলা" title="বাংলা" data-lang="bn">
+            <img src="https://flagcdn.com/24x18/ru.png" alt="Русский" title="Русский" data-lang="ru">
         </div>
-        <div class="donation">
-            <p>FreeBTC.fun - Desenvolvido em 2025</p>
-            <p>Doações BTC: <a href="bitcoin:1NuGAFYjjg17JjPNCXFZ8HCZQMNWiN9bmy" class="btc-address">1NuGAFYjjg17JjPNCXFZ8HCZQMNWiN9bmy</a></p>
+        <button class="info-button" onclick="showModal()" data-i18n="footer.howItWorks">How It Works?</button>
+        <div class="footer-links">
+            <div data-i18n="footer.inspiredBy">Inspired by: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a></div>
+            <div class="credits">
+                <a href="https://github.com/calvet" target="_blank" data-i18n="footer.github">GitHub: @calvet</a>
+            </div>
+            <div class="donation">
+                <p data-i18n="footer.developed">FreeBTC.fun - Developed in 2025</p>
+                <p><span data-i18n="footer.donations">BTC Donations:</span> <a href="bitcoin:1NuGAFYjjg17JjPNCXFZ8HCZQMNWiN9bmy" class="btc-address">1NuGAFYjjg17JjPNCXFZ8HCZQMNWiN9bmy</a></p>
+            </div>
         </div>
     </footer>
 
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 data-i18n="modal.title">How It Works?</h2>
+            <div data-i18n="modal.content"></div>
+        </div>
+    </div>
+
     <script>
+        let currentLang = 'en';
+
+        const i18n = {
+            en: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - Your free chance to find a Bitcoin wallet with balance!',
+                'site.subtitle': 'Your free chance to find a Bitcoin wallet with balance!',
+                'button.start': 'START SEARCHING',
+                'button.stop': 'STOP',
+                'button.copy': 'Copy Private Key',
+                'button.copied': 'Key Copied!',
+                'button.retry': 'Try Again!',
+                'text.searching': 'Searching...',
+                'text.attempts': 'Attempts:',
+                'text.speed': 'Speed:',
+                'text.keys': 'keys/s',
+                'text.target': 'Target Address:',
+                'modal.title': 'How it Works?',
+                'modal.content': `
+                    <p>FreeBTC.fun is a free Bitcoin puzzle challenge that runs directly in your browser. Here's how it works:</p>
+                    <ul>
+                        <li>This challenge is based on the famous Bitcoin Puzzle TX from privatekeys.pw</li>
+                        <li>Your browser generates random private keys within a specific range</li>
+                        <li>If a matching key is found, you can claim the Bitcoin prize!</li>
+                        <li>Everything runs locally in your browser - we never see your keys</li>
+                        <li>No ads, no costs, completely free to try your luck</li>
+                    </ul>
+                    <p>The original puzzle can be found at: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'How it Works?',
+                'footer.inspiredBy': 'Inspired by: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - Developed in 2025',
+                'footer.donations': 'BTC Donations:',
+                'challenge.title': '🎯 BITCOIN PUZZLE CHALLENGE #${number} 🎯',
+                'search.starting': '🔍 Starting private key search... 🔍',
+                'search.status': 'Status:',
+                'search.found': '🎉 KEY FOUND! 🎉',
+                'search.not_found': '❌ Key not found in this attempt ❌',
+                'search.checking': '🔄 Checking address... 🔄',
+                'search.generating': '⚡ Generating private key... ⚡',
+                'wallet.balance': 'Balance:',
+                'wallet.prize': 'Prize: ${prize} BTC',
+                'stats.total_attempts': 'Total Attempts:',
+                'stats.current_speed': 'Current Speed:',
+                'stats.avg_speed': 'Average Speed:',
+                'stats.elapsed_time': 'Elapsed Time:',
+                'stats.estimated_time': 'Estimated Time:',
+                'stats.probability': 'Success Probability:',
+                'wallet.address': '💰 Wallet: ${address} 💰',
+                'challenge.solved': '🎉 JACKPOT! YOU SOLVED CHALLENGE #${number}! 🎉\n',
+                'private.key.found': '💰 PRIVATE KEY FOUND: ${key} 💰\n',
+                'prize.won': '🎰 CONGRATULATIONS! YOU JUST WON ${prize} BTC! 🎰\n',
+                'donation.reminder': '💝 DON\'T FORGET US! MAKE A DONATION! 💝',
+                'keep.trying': '🎲 DON\'T GIVE UP! THE NEXT ATTEMPT MIGHT SOLVE THE CHALLENGE! 🎲\n',
+                'last.key.checked': '🔍 LAST KEY CHECKED: ${key} 🔍'
+            },
+            pt: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!',
+                'site.subtitle': 'Sua chance gratuita de encontrar uma carteira Bitcoin com saldo!',
+                'button.start': 'COMEÇAR BUSCA',
+                'button.stop': 'PARAR',
+                'button.copy': 'Copiar Chave Privada',
+                'button.copied': 'Chave Copiada!',
+                'button.retry': 'Tentar Novamente!',
+                'text.searching': 'Procurando...',
+                'text.attempts': 'Tentativas:',
+                'text.speed': 'Velocidade:',
+                'text.keys': 'chaves/s',
+                'text.target': 'Endereço Alvo:',
+                'modal.title': 'Como Funciona?',
+                'modal.content': `
+                    <p>FreeBTC.fun é um desafio gratuito do Bitcoin Puzzle que roda diretamente no seu navegador. Veja como funciona:</p>
+                    <ul>
+                        <li>Este desafio é baseado no famoso Bitcoin Puzzle TX do privatekeys.pw</li>
+                        <li>Seu navegador gera chaves privadas aleatórias dentro de um intervalo específico</li>
+                        <li>Se uma chave correspondente for encontrada, você pode reivindicar o prêmio em Bitcoin!</li>
+                        <li>Tudo roda localmente no seu navegador - nunca vemos suas chaves</li>
+                        <li>Sem anúncios, sem custos, totalmente gratuito para tentar a sorte</li>
+                    </ul>
+                    <p>O puzzle original pode ser encontrado em: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'Como Funciona?',
+                'footer.inspiredBy': 'Inspirado em: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - Desenvolvido em 2025',
+                'footer.donations': 'Doações BTC:',
+                'challenge.title': '🎯 DESAFIO BITCOIN PUZZLE #${number} 🎯',
+                'search.starting': '🔍 Iniciando busca pela chave privada... 🔍',
+                'search.status': 'Status:',
+                'search.found': '🎉 CHAVE ENCONTRADA! 🎉',
+                'search.not_found': '❌ Chave não encontrada nesta tentativa ❌',
+                'search.checking': '🔄 Verificando endereço... 🔄',
+                'search.generating': '⚡ Gerando chave privada... ⚡',
+                'wallet.balance': 'Saldo:',
+                'wallet.prize': 'Prêmio: ${prize} BTC',
+                'stats.total_attempts': 'Total de Tentativas:',
+                'stats.current_speed': 'Velocidade Atual:',
+                'stats.avg_speed': 'Velocidade Média:',
+                'stats.elapsed_time': 'Tempo Decorrido:',
+                'stats.estimated_time': 'Tempo Estimado:',
+                'stats.probability': 'Probabilidade de Sucesso:',
+                'wallet.address': '💰 Carteira: ${address} 💰',
+                'challenge.solved': '🎉 JACKPOT! VOCÊ RESOLVEU O DESAFIO #${number}! 🎉\n',
+                'private.key.found': '💰 CHAVE PRIVADA ENCONTRADA: ${key} 💰\n',
+                'prize.won': '🎰 PARABÉNS! VOCÊ ACABA DE GANHAR ${prize} BTC! 🎰\n',
+                'donation.reminder': '💝 NÃO ESQUEÇA DA GENTE! FAÇA-NOS UMA DOAÇÃO! 💝',
+                'keep.trying': '🎲 MAS NÃO DESISTA! A PRÓXIMA TENTATIVA PODE RESOLVER O DESAFIO! 🎲\n',
+                'last.key.checked': '🔍 ÚLTIMA CHAVE VERIFICADA: ${key} 🔍'
+            },
+            es: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - ¡Tu oportunidad gratuita de encontrar una billetera Bitcoin con saldo!',
+                'site.subtitle': '¡Tu oportunidad gratuita de encontrar una billetera Bitcoin con saldo!',
+                'button.start': 'COMENZAR BÚSQUEDA',
+                'button.stop': 'DETENER',
+                'button.copy': 'Copiar Clave Privada',
+                'button.copied': '¡Clave Copiada!',
+                'button.retry': '¡Intentar de Nuevo!',
+                'text.searching': 'Buscando...',
+                'text.attempts': 'Intentos:',
+                'text.speed': 'Velocidad:',
+                'text.keys': 'claves/s',
+                'text.target': 'Dirección Objetivo:',
+                'modal.title': '¿Cómo Funciona?',
+                'modal.content': `
+                    <p>FreeBTC.fun es un desafío gratuito de Bitcoin Puzzle que se ejecuta directamente en tu navegador. Así es como funciona:</p>
+                    <ul>
+                        <li>Este desafío está basado en el famoso Bitcoin Puzzle TX de privatekeys.pw</li>
+                        <li>Tu navegador genera claves privadas aleatorias dentro de un rango específico</li>
+                        <li>Si se encuentra una clave coincidente, ¡puedes reclamar el premio en Bitcoin!</li>
+                        <li>Todo se ejecuta localmente en tu navegador - nunca vemos tus claves</li>
+                        <li>Sin anuncios, sin costos, completamente gratis para probar tu suerte</li>
+                    </ul>
+                    <p>El puzzle original se puede encontrar en: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': '¿Cómo Funciona?',
+                'footer.inspiredBy': 'Inspirado en: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - Desarrollado en 2025',
+                'footer.donations': 'Donaciones BTC:',
+                'challenge.title': '🎯 DESAFÍO BITCOIN PUZZLE #${number} 🎯',
+                'search.starting': '🔍 Iniciando búsqueda de clave privada... 🔍',
+                'search.status': 'Estado:',
+                'search.found': '🎉 ¡CLAVE ENCONTRADA! 🎉',
+                'search.not_found': '❌ Clave no encontrada en este intento ❌',
+                'search.checking': '🔄 Verificando dirección... 🔄',
+                'search.generating': '⚡ Generación de clave privada... ⚡',
+                'wallet.balance': 'Saldo:',
+                'wallet.prize': 'Premio: ${prize} BTC',
+                'stats.total_attempts': 'Total de Intentos:',
+                'stats.current_speed': 'Velocidad Actual:',
+                'stats.avg_speed': 'Velocidad Promedio:',
+                'stats.elapsed_time': 'Tiempo Transcurrido:',
+                'stats.estimated_time': 'Tiempo Estimado:',
+                'stats.probability': 'Probabilidad de Éxito:',
+                'wallet.address': '💰 Billetera: ${address} 💰',
+                'challenge.solved': '🎉 ¡JACKPOT! ¡RESOLVISTE EL DESAFÍO #${number}! 🎉\n',
+                'private.key.found': '💰 CLAVE PRIVADA ENCONTRADA: ${key} 💰\n',
+                'prize.won': '🎰 ¡FELICITACIONES! ¡ACABAS DE GANAR ${prize} BTC! 🎰\n',
+                'donation.reminder': '💝 ¡NO NOS OLVIDES! ¡HAZNOS UNA DONACIÓN! 💝',
+                'keep.trying': '🎲 ¡NO TE RINDAS! ¡EL PRÓXIMO INTENTO PODRÍA RESOLVER EL DESAFÍO! 🎲\n',
+                'last.key.checked': '🔍 ÚLTIMA CLAVE VERIFICADA: ${key} 🔍'
+            },
+            zh: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - 免费寻找比特币钱包余额的机会！',
+                'site.subtitle': '免费寻找比特币钱包余额的机会！',
+                'button.start': '开始搜索',
+                'button.stop': '停止',
+                'button.copy': '复制私钥',
+                'button.copied': '已复制！',
+                'button.retry': '重试！',
+                'text.searching': '搜索中...',
+                'text.attempts': '尝试次数：',
+                'text.speed': '速度：',
+                'text.keys': '密钥/秒',
+                'text.target': '目标地址：',
+                'modal.title': '如何运作？',
+                'modal.content': `
+                    <p>FreeBTC.fun 是一个直接在浏览器中运行的免费比特币拼图挑战。以下是它的工作原理：</p>
+                    <ul>
+                        <li>这个挑战基于 privatekeys.pw 的著名比特币拼图 TX</li>
+                        <li>您的浏览器在特定范围内生成随机私钥</li>
+                        <li>如果找到匹配的密钥，您可以领取比特币奖励！</li>
+                        <li>一切都在您的浏览器本地运行 - 我们永远不会看到您的密钥</li>
+                        <li>无广告，无费用，完全免费尝试您的运气</li>
+                    </ul>
+                    <p>原始拼图可以在以下位置找到：<a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': '如何运作？',
+                'footer.inspiredBy': '灵感来自：<a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - 2025年开发',
+                'footer.donations': '比特币捐赠：',
+                'challenge.title': '🎯 比特币拼图挑战 #${number} 🎯',
+                'search.starting': '🔍 开始私钥搜索... 🔍',
+                'search.status': '状态：',
+                'search.found': '🎉 找到密钥！🎉',
+                'search.not_found': '❌ 在此尝试中未找到密钥 ❌',
+                'search.checking': '🔄 检查地址... 🔄',
+                'search.generating': '⚡ 生成私钥... ⚡',
+                'wallet.balance': '余额：',
+                'wallet.prize': '奖励：${prize} BTC',
+                'stats.total_attempts': '总尝试次数：',
+                'stats.current_speed': '当前速度：',
+                'stats.avg_speed': '平均速度：',
+                'stats.elapsed_time': '已用时间：',
+                'stats.estimated_time': '预计时间：',
+                'stats.probability': '成功概率：',
+                'wallet.address': '💰 钱包：${address} 💰',
+                'challenge.solved': '🎉 中奖！您解决了挑战 #${number}！🎉\n',
+                'private.key.found': '💰 找到私钥：${key} 💰\n',
+                'prize.won': '🎰 恭喜！您刚刚赢得了 ${prize} BTC！🎰\n',
+                'donation.reminder': '💝 别忘了我们！请捐款！💝',
+                'keep.trying': '🎲 不要放弃！下一次尝试可能会解决挑战！🎲\n',
+                'last.key.checked': '🔍 最后检查的密钥：${key} 🔍'
+            },
+            hi: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - बिटकॉइन वॉलेट बैलेंस खोजने का आपका मुफ्त मौका!',
+                'site.subtitle': 'बिटकॉइन वॉलेट बैलेंस खोजने का आपका मुफ्त मौका!',
+                'button.start': 'खोज शुरू करें',
+                'button.stop': 'रोकें',
+                'button.copy': 'निजी कुंजी कॉपी करें',
+                'button.copied': 'कुंजी कॉपी की गई!',
+                'button.retry': 'पुनः प्रयास करें!',
+                'text.searching': 'खोज रहे हैं...',
+                'text.attempts': 'प्रयास:',
+                'text.speed': 'गति:',
+                'text.keys': 'कुंजियाँ/सेकंड',
+                'text.target': 'लक्ष्य पता:',
+                'modal.title': 'यह कैसे काम करता है?',
+                'modal.content': `
+                    <p>FreeBTC.fun आपके ब्राउज़र में सीधे चलने वाली एक मुफ्त बिटकॉइन पहेली चुनौती है। यह इस तरह काम करता है:</p>
+                    <ul>
+                        <li>यह चुनौती privatekeys.pw के प्रसिद्ध बिटकॉइन पहेली TX पर आधारित है</li>
+                        <li>आपका ब्राउज़र एक विशिष्ट सीमा के भीतर यादृच्छिक निजी कुंजियाँ उत्पन्न करता है</li>
+                        <li>यदि एक मिलान कुंजी मिलती है, तो आप बिटकॉइन पुरस्कार का दावा कर सकते हैं!</li>
+                        <li>सब कुछ आपके ब्राउज़र में स्थानीय रूप से चलता है - आमने-सामने आपकी कुंजियाँ नहीं देखते</li>
+                        <li>कोई विज्ञापन नहीं, कोई लागत नहीं, अपनी किस्मत आजमाने के लिए पूरी तरह से मुफ्त</li>
+                    </ul>
+                    <p>मूल पहेली यहाँ पाई जा सकती है: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'यह कैसे काम करता है?',
+                'footer.inspiredBy': 'प्रेरित: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - 2025 में विकसित',
+                'footer.donations': 'बिटकॉइन दान:',
+                'challenge.title': '🎯 बिटकॉइन पहेली चुनौती #${number} 🎯',
+                'search.starting': '🔍 निजी कुंजी खोज शुरू कर रहा है... 🔍',
+                'search.status': 'स्थिति:',
+                'search.found': '🎉 कुंजी मिल गई! 🎉',
+                'search.not_found': '❌ इस प्रचेष्टा में कुंजी नहीं मिली ❌',
+                'search.checking': '🔄 पता जाँच रहा है... 🔄',
+                'search.generating': '⚡ निजी कुंजी उत्पन्न कर रहा है... ⚡',
+                'wallet.balance': 'शेष:',
+                'wallet.prize': 'पुरस्कार: ${prize} BTC',
+                'stats.total_attempts': 'कुल प्रचेष्टायें:',
+                'stats.current_speed': 'वर्तमान गति:',
+                'stats.avg_speed': 'औसत गति:',
+                'stats.elapsed_time': 'बीता हुआ समय:',
+                'stats.estimated_time': 'अनुमानित समय:',
+                'stats.probability': 'सफलता की संभावना:',
+                'wallet.address': '💰 वॉलेट: ${address} 💰',
+                'challenge.solved': '🎉 जेकपॉट! आपने चुनौती #${number} सुलझाया है! 🎉\n',
+                'private.key.found': '💰 निजी कुंजी मिल गई: ${key} 💰\n',
+                'prize.won': '🎰 बधाई हो! आपने अभी ${prize} BTC जीता है! 🎰\n',
+                'donation.reminder': '💝 हमें मत भूलना! दान करें! 💝',
+                'keep.trying': '🎲 हार मत मानो! अगला प्रचेष्टा चुनौती सुलझाने को प्रयास कर सकता है! 🎲\n',
+                'last.key.checked': '🔍 अंतिम जाँची गई कुंजी: ${key} 🔍'
+            },
+            ar: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - فرصتك المجانية للعثور على محفظة بيتكوين برصيد!',
+                'site.subtitle': 'فرصتك المجانية للعثور على محفظة بيتكوين برصيد!',
+                'button.start': 'بدء البحث',
+                'button.stop': 'إيقاف',
+                'button.copy': 'نسخ المفتاح الخاص',
+                'button.copied': 'تم نسخ المفتاح!',
+                'button.retry': 'حاول مرة أخرى!',
+                'text.searching': 'جاري البحث...',
+                'text.attempts': 'المحاولات:',
+                'text.speed': 'السرعة:',
+                'text.keys': 'مفاتيح/ثانية',
+                'text.target': 'العنوان المستهدف:',
+                'modal.title': 'كيف يعمل؟',
+                'modal.content': `
+                    <p>FreeBTC.fun هو تحدٍ مجاني لأحجية البيتكوين يعمل مباشرة في متصفحك. إليك كيف يعمل:</p>
+                    <ul>
+                        <li>هذا التحدي مبني على أحجية البيتكوين الشهيرة TX من privatekeys.pw</li>
+                        <li>متصفحك يولد مفاتيح خاصة عشوائية ضمن نطاق محدد</li>
+                        <li>إذا تم العثور على مفتاح مطابق، يمكنك المطالبة بجائزة البيتكوين!</li>
+                        <li>كل شيء يعمل محلياً في متصفحك - نحن لا نرى مفاتيحك أبداً</li>
+                        <li>لا إعلانات، لا تكاليف، مجاني تماماً لتجربة حظك</li>
+                    </ul>
+                    <p>يمكن العثور على الأحجية الأصلية في: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'كيف يعمل؟',
+                'footer.inspiredBy': 'مستوحى من: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - تم التطوير في 2025',
+                'footer.donations': 'تبرعات البيتكوين:',
+                'challenge.title': '🎯 تحدي أحجية البيتكوين #${number} 🎯',
+                'search.starting': '🔍 بدء البحث عن المفتاح الخاص... 🔍',
+                'search.status': 'الحالة:',
+                'search.found': '🎉 تم العثور على المفتاح! 🎉',
+                'search.not_found': '❌ لم يتم العثور على المفتاح في هذه المحاولة ❌',
+                'search.checking': '🔄 جاري التحقق من العنوان... 🔄',
+                'search.generating': '⚡ جاري إنشاء المفتاح الخاص... ⚡',
+                'wallet.balance': 'الرصيد:',
+                'wallet.prize': 'الجائزة: ${prize} BTC',
+                'stats.total_attempts': 'إجمالي المحاولات:',
+                'stats.current_speed': 'السرعة الحالية:',
+                'stats.avg_speed': 'متوسط السرعة:',
+                'stats.elapsed_time': 'الوقت المنقضي:',
+                'stats.estimated_time': 'الوقت المقدر:',
+                'stats.probability': 'احتمالية النجاح:',
+                'wallet.address': '💰 المحفظة: ${address} 💰',
+                'challenge.solved': '🎉 جاكبوت! لقد حللت التحدي #${number}! 🎉\n',
+                'private.key.found': '💰 تم العثور على المفتاح الخاص: ${key} 💰\n',
+                'prize.won': '🎰 مبروك! لقد فزت للتو بـ ${prize} BTC! 🎰\n',
+                'donation.reminder': '💝 لا تنسنا! تبرع لنا! 💝',
+                'keep.trying': '🎲 لا تستسلم! المحاولة التالية قد تحل التحدي! 🎲\n',
+                'last.key.checked': '🔍 آخر مفتاح تم التحقق منه: ${key} 🔍'
+            },
+            bn: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - বিটকয়েন ওয়ালেট ব্যালেন্স খুঁজে পাওয়ার আপনার বিনামূল্যের সুযোগ!',
+                'site.subtitle': 'বিটকয়েন ওয়ালেট ব্যালেন্স খুঁজে পাওয়ার আপনার বিনামূল্যের সুযোগ!',
+                'button.start': 'অনুসন্ধান শুরু করুন',
+                'button.stop': 'বন্ধ করুন',
+                'button.copy': 'প্রাইভেট কী কপি করুন',
+                'button.copied': 'কী কপি করা হয়েছে!',
+                'button.retry': 'আবার চেষ্টা করুন!',
+                'text.searching': 'অনুসন্ধান চলছে...',
+                'text.attempts': 'চেষ্টা:',
+                'text.speed': 'গতি:',
+                'text.keys': 'কী/সেকেন্ড',
+                'text.target': 'লক্ষ্য ঠিকানা:',
+                'modal.title': 'এটি কিভাবে কাজ করে?',
+                'modal.content': `
+                    <p>FreeBTC.fun হল একটি বিনামূল্যের বিটকয়েন পাজল চ্যালেঞ্জ যা সরাসরি আপনার ব্রাউজারে চলে। এখানে এটি কিভাবে কাজ করে:</p>
+                    <ul>
+                        <li>এই চ্যালেঞ্জটি privatekeys.pw এর বিখ্যাত বিটকয়েন পাজল TX এর উপর ভিত্তি করে</li>
+                        <li>আপনার ব্রাউজার একটি নির্দিষ্ট পরিসরে র্যান্ডম প্রাইভেট কী তৈরি করে</li>
+                        <li>যদি একটি মিল পাওয়া যায়, আপনি বিটকয়েন পুরস্কার দাবি করতে পারেন!</li>
+                        <li>সবকিছু আপনার ব্রাউজারে স্থানীয় রূপ সহ চলে - আমরা কখনই আপনার কী দেখি না</li>
+                        <li>কোন বিজ্ঞাপন নেই, কোন খরচ নেই, আপনার ভাগ্য পরীক্ষা করার জন্য সম্পূর্ণ বিনামূল্যে</li>
+                    </ul>
+                    <p>মূল পাজল এখানে পাওয়া যাবে: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'এটি কিভাবে কাজ করে?',
+                'footer.inspiredBy': 'অনুপ্রাণিত: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - 2025 সালে উন্নত',
+                'footer.donations': 'বিটকয়েন দান:',
+                'challenge.title': '🎯 বিটকয়েন পাজল চ্যালেঞ্জ #${number} 🎯',
+                'search.starting': '🔍 প্রাইভেট কী অনুসন্ধান শুরু হচ্ছে... 🔍',
+                'search.status': 'অবস্থা:',
+                'search.found': '🎉 কী পাওয়া গেছে! 🎉',
+                'search.not_found': '❌ এই প্রচেষ্টায় কী পাওয়া যায়নি ❌',
+                'search.checking': '🔄 ঠিকানা পরীক্ষা করা হচ্ছে... 🔄',
+                'search.generating': '⚡ প্রাইভেট কী তৈরি করা হচ্ছে... ⚡',
+                'wallet.balance': 'ব্যালেন্স:',
+                'wallet.prize': 'পুরস্কার: ${prize} BTC',
+                'stats.total_attempts': 'মোট প্রচেষ্টা:',
+                'stats.current_speed': 'বর্তমান গতি:',
+                'stats.avg_speed': 'গড় গতি:',
+                'stats.elapsed_time': 'অতিবাহিত সময়:',
+                'stats.estimated_time': 'আনুমানিক সময়:',
+                'stats.probability': 'সাফল্যের সম্ভাবনা:',
+                'wallet.address': '💰 ওয়ালেট: ${address} 💰',
+                'challenge.solved': '🎉 জ্যাকপট! আপনি চ্যালেঞ্জ #${number} সমাধান করেছেন! 🎉\n',
+                'private.key.found': '💰 প্রাইভেট কী পাওয়া গেছে: ${key} 💰\n',
+                'prize.won': '🎰 অভিনন্দন! আপনি এইমাত্র ${prize} BTC জিতেছেন! 🎰\n',
+                'donation.reminder': '💝 আমাদের ভুলবেন না! দান করুন! 💝',
+                'keep.trying': '🎲 হার মত মানো! পরবর্তী প্রচেষ্টা চ্যালেঞ্জ সমাধান করতে পারে! 🎲\n',
+                'last.key.checked': '🔍 শেষ চেক করা কী: ${key} 🔍'
+            },
+            ru: {
+                'site.title': 'FreeBTC.fun',
+                'site.title.full': 'FreeBTC.fun - Ваш бесплатный шанс найти биткоин-кошелек с балансом!',
+                'site.subtitle': 'Ваш бесплатный шанс найти биткоин-кошелек с балансом!',
+                'button.start': 'НАЧАТЬ ПОИСК',
+                'button.stop': 'ОСТАНОВИТЬ',
+                'button.copy': 'Копировать Приватный Ключ',
+                'button.copied': 'Ключ Скопирован!',
+                'button.retry': 'Попробовать Снова!',
+                'text.searching': 'Поиск...',
+                'text.attempts': 'Попытки:',
+                'text.speed': 'Скорость:',
+                'text.keys': 'ключей/с',
+                'text.target': 'Целевой Адрес:',
+                'modal.title': 'Как Это Работает?',
+                'modal.content': `
+                    <p>FreeBTC.fun - это бесплатный биткоин-пазл, который работает прямо в вашем браузере. Вот как это работает:</p>
+                    <ul>
+                        <li>Этот пазл основан на знаменитом Bitcoin Puzzle TX с privatekeys.pw</li>
+                        <li>Ваш браузер генерирует случайные приватные ключи в определенном диапазоне</li>
+                        <li>Если найден подходящий ключ, вы можете получить биткоин-приз!</li>
+                        <li>Все работает локально в вашем браузере - мы никогда не видим ваши ключи</li>
+                        <li>Без рекламы, без затрат, полностью бесплатно для проверки удачи</li>
+                    </ul>
+                    <p>Оригинальный пазл можно найти здесь: <a href="https://privatekeys.pw/puzzles/bitcoin-puzzle-tx" target="_blank">privatekeys.pw/puzzles/bitcoin-puzzle-tx</a></p>
+                `,
+                'footer.howItWorks': 'Как Это Работает?',
+                'footer.inspiredBy': 'Вдохновлено: <a href="https://lmajowka.github.io/webloteria/" target="_blank">Web Loteria</a>',
+                'footer.github': 'GitHub: @calvet',
+                'footer.developed': 'FreeBTC.fun - Разработано в 2025',
+                'footer.donations': 'Пожертвования BTC:',
+                'challenge.title': '🎯 БИТКОИН ПАЗЛ ЧЕЛЛЕНДЖ #${number} 🎯',
+                'search.starting': '🔍 Начинаем поиск приватного ключа... 🔍',
+                'search.status': 'Статус:',
+                'search.found': '🎉 КЛЮЧ НАЙДЕН! 🎉',
+                'search.not_found': '❌ Ключ не найден в этой попытке ❌',
+                'search.checking': '🔄 Проверка адреса... 🔄',
+                'search.generating': '⚡ Генерация приватного ключа... ⚡',
+                'wallet.balance': 'Баланс:',
+                'wallet.prize': 'Приз: ${prize} BTC',
+                'stats.total_attempts': 'Всего Попыток:',
+                'stats.current_speed': 'Текущая Скорость:',
+                'stats.avg_speed': 'Средняя Скорость:',
+                'stats.elapsed_time': 'Прошедшее Время:',
+                'stats.estimated_time': 'Оценочное Время:',
+                'stats.probability': 'Вероятность Успеха:',
+                'wallet.address': '💰 Кошелек: ${address} 💰',
+                'challenge.solved': '🎉 ДЖЕКПОТ! ВЫ РЕШИЛИ ЧЕЛЛЕНДЖ #${number}! 🎉\n',
+                'private.key.found': '💰 НАЙДЕН ПРИВАТНЫЙ КЛЮЧ: ${key} 💰\n',
+                'prize.won': '🎰 ПОЗДРАВЛЯЕМ! ВЫ ТОЛЬКО ЧТО ВЫИГРАЛИ ${prize} BTC! 🎰\n',
+                'donation.reminder': '💝 НЕ ЗАБЫВАЙТЕ О НАС! СДЕЛАЙТЕ ПОЖЕРТВОВАНИЕ! 💝',
+                'keep.trying': '🎲 НЕ СДАВАЙТЕСЬ! СЛЕДУЮЩАЯ ПОПЫТКА МОЖЕТ РЕШИТЬ ЧЕЛЛЕНДЖ! 🎲\n',
+                'last.key.checked': '🔍 ПОСЛЕДНИЙ ПРОВЕРЕННЫЙ КЛЮЧ: ${key} 🔍'
+            }
+        };
+
+        function detectBrowserLanguage() {
+            const supportedLanguages = ['en', 'pt', 'es', 'zh', 'hi', 'ar', 'bn', 'ru'];
+            
+            let browserLang = navigator.language || navigator.userLanguage;
+            
+            if (!browserLang) return 'en';
+            
+            browserLang = browserLang.split('-')[0].toLowerCase();
+            
+            if (supportedLanguages.includes(browserLang)) {
+                return browserLang;
+            }
+            
+            return 'en';
+        }
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (i18n[lang] && i18n[lang][key]) {
+                    element.innerHTML = i18n[lang][key];
+                }
+            });
+
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        function showModal() {
+            const modal = document.getElementById('infoModal');
+            const content = document.querySelector('.modal-content [data-i18n="modal.content"]');
+            if (content) {
+                content.innerHTML = i18n[currentLang]['modal.content'];
+            }
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        document.querySelectorAll('.language-selector img').forEach(img => {
+            img.addEventListener('click', () => {
+                updateLanguage(img.getAttribute('data-lang'));
+            });
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('infoModal')) {
+                closeModal();
+            }
+        }
+
+        updateLanguage(detectBrowserLanguage());
+
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -464,9 +1065,8 @@
             
             isSpinning = true;
             clearLog();
-            log('🎯 DESAFIO BITCOIN PUZZLE #69 🎯');
-            log(`💰 Carteira: ${TARGET_ADDRESS} 💰`);
-            log('🔍 Iniciando busca pela chave privada...');
+            log('challenge.title', { number: CHALLENGE_NUMBER });
+            log('search.starting');
             await startAnimation();
             
             if (simulateWin) {
@@ -502,7 +1102,6 @@
         async function showResult(success, privateKey) {
             if (success) {
                 document.body.classList.add('win-theme');
-                
                 document.getElementById("matrix").style.display = 'block';
                 
                 const walletImages = document.querySelectorAll('.wallet-image');
@@ -528,20 +1127,21 @@
                     }
                 });
 
-                log(`🎉 JACKPOT! VOCÊ RESOLVEU O DESAFIO #${CHALLENGE_NUMBER}! 🎉\n`);
-                log('💰 CHAVE PRIVADA ENCONTRADA: ' + privateKey.toString(16) + ' 💰\n');
-                log(`🎰 PARABÉNS! VOCÊ ACABA DE GANHAR ${CHALLENGE_PRIZE} BTC! 🎰\n`);
-                log('💝 NÃO ESQUEÇA DA GENTE! FAÇA-NOS UMA DOAÇÃO! 💝');
+                log('wallet.address', { address: TARGET_ADDRESS });
+                log('challenge.solved', { number: CHALLENGE_NUMBER });
+                log('private.key.found', { key: privateKey.toString(16) });
+                log('prize.won', { prize: CHALLENGE_PRIZE });
+                log('donation.reminder');
                 
                 const copyButton = document.createElement('button');
                 copyButton.className = 'copy-button';
-                copyButton.textContent = 'Copiar Chave Privada';
+                copyButton.textContent = i18n[currentLang]['button.copy'];
                 copyButton.style.display = 'block';
                 copyButton.onclick = () => {
                     navigator.clipboard.writeText(privateKey.toString(16));
-                    copyButton.textContent = 'Chave Copiada!';
+                    copyButton.textContent = i18n[currentLang]['button.copied'];
                     setTimeout(() => {
-                        copyButton.textContent = 'Copiar Chave Privada';
+                        copyButton.textContent = i18n[currentLang]['button.copy'];
                     }, 2000);
                 };
                 document.getElementById('console').appendChild(copyButton);
@@ -549,13 +1149,12 @@
                 document.getElementById("start").style.display = 'none';
             } else {
                 document.getElementById("matrix").style.display = 'none';
-                log('❌ NÃO FOI DESSA VEZ! ❌\n');
-                log('🎲 MAS NÃO DESISTA! A PRÓXIMA TENTATIVA PODE RESOLVER O DESAFIO! 🎲\n');
-                log('🔍 ÚLTIMA CHAVE VERIFICADA: ' + privateKey.toString(16) + '🔍');
+                log('keep.trying');
+                log('last.key.checked', { key: privateKey.toString(16) });
                 
                 const startButton = document.getElementById("start");
                 startButton.style.display = '';
-                startButton.textContent = 'Tentar a Sorte Novamente!';
+                startButton.textContent = i18n[currentLang]['button.retry'];
             }
             
             hasAttempted = true;
@@ -566,9 +1165,17 @@
             document.getElementById('console').innerHTML = '';
         }
 
-        function log(message) {
+        function log(message, params = {}) {
             const consoleDiv = document.getElementById('console');
-            consoleDiv.innerHTML += message + '<br>';
+            if (message in i18n[currentLang]) {
+                let translatedMessage = i18n[currentLang][message];
+                Object.entries(params).forEach(([key, value]) => {
+                    translatedMessage = translatedMessage.replace(`\${${key}}`, value);
+                });
+                consoleDiv.innerHTML += translatedMessage + '<br>';
+            } else {
+                consoleDiv.innerHTML += message + '<br>';
+            }
         }
 
         function generateAddress(privateKeyInt) {
