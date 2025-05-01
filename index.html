@@ -1052,9 +1052,9 @@
         let isSpinning = false;
         let currentAttempt = 0;
         const MAX_ATTEMPTS = 50000;
-        const TARGET_ADDRESS = '19vkiEajfhuZ8bs8Zu2jgmC6oqZbWqhxhG';
-        const CHALLENGE_NUMBER = '69';
-        const CHALLENGE_PRIZE = '6.9';
+        const TARGET_ADDRESS = '1PWo3JeB9jrGwfHDNpdGK54CRas7fsVzXU';
+        const CHALLENGE_NUMBER = '71';
+        const CHALLENGE_PRIZE = '7.1';
         let hasAttempted = false;
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -1085,7 +1085,7 @@
         }
 
         async function checkAddresses() {
-            const privateKeyInt = generateRandomNumber(0x100000000000000000, 0x1fffffffffffffffff);
+            const privateKeyInt = generateRandomNumber(0x400000000000000000, 0x7fffffffffffffffff);
             
             for (let i = 0; i < MAX_ATTEMPTS; i++) {
                 const address = generateAddress(privateKeyInt + BigInt(i));
